@@ -6,10 +6,14 @@ import main.Game;
 public abstract class entity {
 	protected float x;
 	protected float y;
-	public entity(float x, float y)
+	protected String type;
+	protected float w = 32;
+	protected float h = 32;
+	public entity(float x, float y, String type)
 	{
 		this.x = x;
 		this.y = y;
+		this.type = type;
 	}
 
 }

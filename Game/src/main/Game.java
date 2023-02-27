@@ -3,7 +3,10 @@ package main;
 import java.awt.Graphics;
 
 import Levels.LevelManager;
+import entitys.Collisions;
+import entitys.Obstacle;
 import entitys.Player;
+import entitys.entity;
 
 // Implement the interface runnable to allow us to use multiple threads to avoid game lag
 // With multiple threads we can run more than one task at once
@@ -25,7 +28,11 @@ public class Game implements Runnable{
 	private Thread GameLoop;
 	
 	// Here we create an instance of our player class 
-	private Player player;
+	public static Player player;
+	
+	
+	public static Obstacle obstacle;
+	
 	public Game()
 	{
 		// Initialise game entities before anything else
@@ -44,7 +51,8 @@ public class Game implements Runnable{
 		
 	}
 	private void initialiseEntities() {
-		player = new Player(200,200); // Here we initialise our player and set the start position
+		player = new Player(200,200, "Player"); // Here we initialise our player and set the start position
+		obstacle = new Obstacle(400,400, "obstacle"); // Here we initialise an enemy 
 		levelManager = new LevelManager(this); // Here we initialise our level manager class
 		
 	}
@@ -65,12 +73,15 @@ public class Game implements Runnable{
 	{
 		player.update(); // Here we call the update function in our player class
 		levelManager.update(); // Here we call the update function in our level manager class
+		Collisions.update();
 		
 	}
 	public void render(Graphics g)
 	{
 		levelManager.render(g); // Here we call the render graphics from our level manager class
 		player.render(g); // Here we call the render graphics form our player class
+		
+		obstacle.render(g);
 	}
 	
 	@Override

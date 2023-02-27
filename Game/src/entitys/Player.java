@@ -22,8 +22,8 @@ import main.Game;
 public class Player extends entity{
 
 	private BufferedImage[][] animations;
-	public Player(float x, float y) {
-		super(x, y);
+	public Player(float x, float y, String type) {
+		super(x, y, type);
 		startAnimations();
 	}
 	
@@ -77,17 +77,18 @@ public class Player extends entity{
 	
 	
 	
-	public void setSpeed(int speed)
+	public void setSpeed(float d)
 	{
-		playerSpeed = speed;
+		playerSpeed = d;
 	}
 	
 	// Variable to keep track of if player is moving
 	private boolean playerMoving = false;
 
 	
-	private float playerSpeed = 1.5f;
+	private float playerSpeed = 0.5f;
 	public static int playerAttackingAdd;
+	public static Boolean canMove = true;
 	private void updatePostition() {
 		
 		playerMoving = false;
@@ -99,34 +100,37 @@ public class Player extends entity{
 			playerAttackingAdd = 3;  // Set player action animation to attacking if attacking is set to true
 			animationSpeed = 20;
 		}
-		if(leftMoving && !rightMoving && x > -15) // only move if player isn't -15 pixels out of game bounds
+		if(canMove)
 		{
-			x -= playerSpeed;
-			playerMoving = true;
-			animationSpeed = 20;
-			playerAction = left;
-		}
-		else if (rightMoving && !leftMoving && x < (Game.WindowWidth-50)) // check game window width to stop player leaving bounds
-		{
-			x += playerSpeed;
-			playerMoving = true;
-			animationSpeed = 20;
-			playerAction = right;
-		}
-		
-		if(upMoving && !downMoving && y > -15) // only move if player isn't -15 pixels out of game bounds
-		{
-			y -= playerSpeed;
-			playerMoving = true;
-			animationSpeed = 20;
-			playerAction = up;
-		}
-		else if (downMoving && !upMoving && y < (Game.WindowHeight-50)) // check game window height to stop player leaving bounds
-		{
-			y += playerSpeed;
-			playerMoving = true;
-			animationSpeed = 20;
-			playerAction = down;
+			if(leftMoving && !rightMoving && x > -15) // only move if player isn't -15 pixels out of game bounds
+			{
+				x -= playerSpeed;
+				playerMoving = true;
+				animationSpeed = 20;
+				playerAction = left;
+			}
+			else if (rightMoving && !leftMoving && x < (Game.WindowWidth-50)) // check game window width to stop player leaving bounds
+			{
+				x += playerSpeed;
+				playerMoving = true;
+				animationSpeed = 20;
+				playerAction = right;
+			}
+			
+			if(upMoving && !downMoving && y > -15) // only move if player isn't -15 pixels out of game bounds
+			{
+				y -= playerSpeed;
+				playerMoving = true;
+				animationSpeed = 20;
+				playerAction = up;
+			}
+			else if (downMoving && !upMoving && y < (Game.WindowHeight-50)) // check game window height to stop player leaving bounds
+			{
+				y += playerSpeed;
+				playerMoving = true;
+				animationSpeed = 20;
+				playerAction = down;
+			}
 		}
 	}
 	private void startAnimations() 
@@ -153,6 +157,42 @@ public class Player extends entity{
 		playerAttacking = false;
 		
 	}
+	
+	public void CheckCollision(entity entity)
+	{
+		System.out.println(canMove);
+			// I check if there is any gap between 2 rectangles, if a gap exists this means there is no collision 
+		  if(this.x < (entity.x + entity.w) && (this.x + entity.w) > entity.x && this.y < (entity.y + entity.h) && (this.h + this.y) > entity.y)
+		  {
+			  // If entity is an obstacle I will stop the payer from moving into it by halting movement and increasing x and y when relevant
+			  if(entity.type == "obstacle")
+			  {
+				  canMove = false;
+				  if(this.x < entity.x)
+				  {
+					  this.x -= 0.1;
+				  }
+				  if(this.x > entity.x)
+				  {
+					  this.x += 0.1;
+				  }
+				  if(this.y < entity.y)
+				  {
+					  this.y -= 0.1;
+				  }
+				  if(this.y > entity.y)
+				  {
+					  this.y += 0.1;
+				  }
+			  }
+		  }
+		  else
+		  {
+			 canMove = true;
+		  }
+
+	}
+	
 	// Getters and setters for the movement 
 	public void setAttack(boolean attacking) {
 		this.playerAttacking = attacking;
