@@ -1,4 +1,7 @@
 package entitys;
+
+import main.Game;
+
 // This class will be base class for the player and enemies, we will make is abstract so only objects of subclasses can be made
 public abstract class entity {
 	protected float x;
@@ -8,4 +11,7 @@ public abstract class entity {
 		this.x = x;
 		this.y = y;
 	}
+
 }
+
+

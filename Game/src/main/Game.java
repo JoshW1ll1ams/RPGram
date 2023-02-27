@@ -24,7 +24,7 @@ public class Game implements Runnable{
 	//Here we create our game loop thread
 	private Thread GameLoop;
 	
-	// Here we create an instance of our player class
+	// Here we create an instance of our player class 
 	private Player player;
 	public Game()
 	{

@@ -16,6 +16,8 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import main.Game;
+
 // Player class extends entity class
 public class Player extends entity{
 
@@ -97,14 +99,14 @@ public class Player extends entity{
 			playerAttackingAdd = 3;  // Set player action animation to attacking if attacking is set to true
 			animationSpeed = 20;
 		}
-		if(leftMoving && !rightMoving)
+		if(leftMoving && !rightMoving && x > -15) // only move if player isn't -15 pixels out of game bounds
 		{
 			x -= playerSpeed;
 			playerMoving = true;
 			animationSpeed = 20;
 			playerAction = left;
 		}
-		else if (rightMoving && !leftMoving)
+		else if (rightMoving && !leftMoving && x < (Game.WindowWidth-50)) // check game window width to stop player leaving bounds
 		{
 			x += playerSpeed;
 			playerMoving = true;
@@ -112,14 +114,14 @@ public class Player extends entity{
 			playerAction = right;
 		}
 		
-		if(upMoving && !downMoving)
+		if(upMoving && !downMoving && y > -15) // only move if player isn't -15 pixels out of game bounds
 		{
 			y -= playerSpeed;
 			playerMoving = true;
 			animationSpeed = 20;
 			playerAction = up;
 		}
-		else if (downMoving && !upMoving)
+		else if (downMoving && !upMoving && y < (Game.WindowHeight-50)) // check game window height to stop player leaving bounds
 		{
 			y += playerSpeed;
 			playerMoving = true;
