@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 
 import Levels.LevelManager; 
 import Levels.Maps;
+import entitys.Player;
 
 import static actions.Constant.Directions.*;
 

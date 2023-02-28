@@ -102,14 +102,14 @@ public class Player extends entity{
 		}
 		if(canMove)
 		{
-			if(leftMoving && !rightMoving && x > -15) // only move if player isn't -15 pixels out of game bounds
+			if(leftMoving && !rightMoving && x > -20) // only move if player isn't -20 pixels out of game bounds
 			{
 				x -= playerSpeed;
 				playerMoving = true;
 				animationSpeed = 20;
 				playerAction = left;
 			}
-			else if (rightMoving && !leftMoving && x < (Game.WindowWidth-50)) // check game window width to stop player leaving bounds
+			else if (rightMoving && !leftMoving && x < (Game.WindowWidth-40)) // check game window width to stop player leaving bounds
 			{
 				x += playerSpeed;
 				playerMoving = true;
@@ -124,7 +124,7 @@ public class Player extends entity{
 				animationSpeed = 20;
 				playerAction = up;
 			}
-			else if (downMoving && !upMoving && y < (Game.WindowHeight-50)) // check game window height to stop player leaving bounds
+			else if (downMoving && !upMoving && y < (Game.WindowHeight-45)) // check game window height to stop player leaving bounds
 			{
 				y += playerSpeed;
 				playerMoving = true;
@@ -157,41 +157,13 @@ public class Player extends entity{
 		playerAttacking = false;
 		
 	}
-	
-	public void CheckCollision(entity entity)
-	{
-		System.out.println(canMove);
-			// I check if there is any gap between 2 rectangles, if a gap exists this means there is no collision 
-		  if(this.x < (entity.x + entity.w) && (this.x + entity.w) > entity.x && this.y < (entity.y + entity.h) && (this.h + this.y) > entity.y)
-		  {
-			  // If entity is an obstacle I will stop the payer from moving into it by halting movement and increasing x and y when relevant
-			  if(entity.type == "obstacle")
-			  {
-				  canMove = false;
-				  if(this.x < entity.x)
-				  {
-					  this.x -= 0.1;
-				  }
-				  if(this.x > entity.x)
-				  {
-					  this.x += 0.1;
-				  }
-				  if(this.y < entity.y)
-				  {
-					  this.y -= 0.1;
-				  }
-				  if(this.y > entity.y)
-				  {
-					  this.y += 0.1;
-				  }
-			  }
-		  }
-		  else
-		  {
-			 canMove = true;
-		  }
 
-	}
+	
+	public void CheckCollision()
+	{
+		Collisions.TouchingBlock(0, this);
+	 }
+	
 	
 	// Getters and setters for the movement 
 	public void setAttack(boolean attacking) {

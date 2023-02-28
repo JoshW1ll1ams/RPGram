@@ -37,7 +37,7 @@ public class Game implements Runnable{
 	{
 		// Initialise game entities before anything else
 		initialiseEntities();
-
+		System.out.println(WindowWidth);
 		// Create a new instance of panel class that will be our main game panel
 		GamePanel = new Panel(this);
 		// Create a new instance of window class that will be our main game window 
@@ -50,6 +50,35 @@ public class Game implements Runnable{
 		startGameLoop();
 		
 	}
+	
+	// Function to return the current tile the player is on
+	public static int CurrentTile()
+	{
+		int currentX = 0;
+		int currentY = 0;
+		int counterX = 0;
+		int counterY = 0;
+		// Iterate the x axis 
+		for(int i =1; i < 32; i++)
+		{
+			if(player.x+8 > counterX && player.x+8 < counterX+32) // Check which bounds the x is between in iterations of our tile width which is 32, add 8 to find the centre of our player not top left
+			{
+				currentX = i;
+			}
+			counterX += 32;
+		}
+		for(int i =1; i < 32; i++)
+		{
+			if(player.y+8 > counterY && player.y+8 < counterY+32) // Check which bounds the y is between in iterations of our tile height which is 32, add 8 to find the centre of our player not top left
+			{
+				currentY = i;
+			}
+			counterY += 32;
+		}
+		int currentTile = (32*currentY+currentX+1); // This formula takes the current x and y and returns the correct tile number
+		return currentTile;
+	}
+	
 	private void initialiseEntities() {
 		player = new Player(200,200, "Player"); // Here we initialise our player and set the start position
 		obstacle = new Obstacle(400,400, "obstacle"); // Here we initialise an enemy 

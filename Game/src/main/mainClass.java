@@ -1,5 +1,6 @@
 package main;
 
+import entitys.Player;
 import entitys.entity;
 
 public class mainClass {

@@ -4,8 +4,8 @@ import main.Game;
 
 // This class will be base class for the player and enemies, we will make is abstract so only objects of subclasses can be made
 public abstract class entity {
-	protected float x;
-	protected float y;
+	public float x;
+	public float y;
 	protected String type;
 	protected float w = 32;
 	protected float h = 32;

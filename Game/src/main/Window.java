@@ -33,8 +33,7 @@ public class Window extends JFrame{
 			@Override
 			public void windowLostFocus(WindowEvent e) {
 				panel.getGame().focusLost();
-				System.out.println("Test");
-				
+
 			}
 
 		});
