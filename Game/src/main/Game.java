@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import Levels.LevelManager;
 import entitys.Collisions;
-import entitys.Obstacle;
+import entitys.Mob;
 import entitys.Player;
 import entitys.entity;
 
@@ -31,8 +31,8 @@ public class Game implements Runnable{
 	public static Player player;
 	
 	
-	public static Obstacle obstacle;
-	
+	public static Mob enemy1;
+
 	public Game()
 	{
 		// Initialise game entities before anything else
@@ -80,10 +80,11 @@ public class Game implements Runnable{
 	}
 	
 	private void initialiseEntities() {
-		player = new Player(200,200, "Player"); // Here we initialise our player and set the start position
-		obstacle = new Obstacle(400,400, "obstacle"); // Here we initialise an enemy 
+		player = new Player(1,100, "Player",100,1); // Here we initialise our player and set the start position
 		levelManager = new LevelManager(this); // Here we initialise our level manager class
 		
+		
+		enemy1 = new Mob(200,200, "Player", 500,1);
 	}
 	private void startGameLoop()
 	{
@@ -100,9 +101,10 @@ public class Game implements Runnable{
 	
 	public void Update()
 	{
+		Collisions.update();
 		player.update(); // Here we call the update function in our player class
 		levelManager.update(); // Here we call the update function in our level manager class
-		Collisions.update();
+		
 		
 	}
 	public void render(Graphics g)
@@ -110,7 +112,11 @@ public class Game implements Runnable{
 		levelManager.render(g); // Here we call the render graphics from our level manager class
 		player.render(g); // Here we call the render graphics form our player class
 		
-		obstacle.render(g);
+		if(enemy1.AliveCheck() == true) // Only render enemy if alive
+		{
+			enemy1.render(g);
+		}
+
 	}
 	
 	@Override

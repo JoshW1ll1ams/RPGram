@@ -3,6 +3,7 @@ package Levels;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import entitys.Collisions;
 import entitys.LoadSave;
 import main.Game;
 
@@ -35,13 +36,13 @@ public class LevelManager {
 	}
 
 
-	static int[] map = Maps.map1; // Set the default map 
+	static int[] map = Maps.map12; // Set the default map 
 	public void render(Graphics g)
 	{
 		int counter = 0; // Set a counter to track the mapping index
 		int pos = 0; // Variable to track the current sub image 
 		map = GetCurrentMap(); // Always pull the current map 
-		
+
 		for(int i=0; i < 16; i++)  // Iterate the y axis 
 		{
 			for(int j=0; j < 32; j++) // Iterate the x axis 
@@ -51,6 +52,7 @@ public class LevelManager {
 				g.drawImage(levelSprite[pos], j*32, i*32, 32, 32, null); // Draw the image 
 			}
 		}
+
 		
 	}
 	

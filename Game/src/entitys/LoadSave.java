@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 public class LoadSave {
 	
 	public static final String PlayerSprite = "/Assasin-Black.png"; 
-	public static final String EnemySprite = "/Assasin-Black.png"; 
+	public static final String EnemySprite = "/tileset.png"; 
 	public static final String LevelSprite = "/tileset.png"; 
 	
 	// Function to take in an input stream and return a buffered image 

@@ -42,7 +42,7 @@ public class Panel extends JPanel{
 		// Here we set the dimensions of our JPanel 
 		Dimension size = new Dimension(Game.WindowWidth,Game.WindowHeight); // Here we use our games width and height we calculate using the tiles on the x and y axis
 		setPreferredSize(size);
-		setBackground(Color.green);
+		setBackground(Color.darkGray);
 	}
 	
 	
@@ -56,8 +56,10 @@ public class Panel extends JPanel{
 		// Calls super class of JPanel(JComponent)
 		// Ensures the paint method of superclass is done before we add more images
 		super.paintComponent(g);
-		
 		game.render(g);
+		
+		   g.setColor(new Color(255, 255, 255, 80));
+		   g.fillRect((int)Game.player.x+16,(int)Game.player.y+16,(int)Game.player.playerHeight-32,(int)Game.player.playerWidth-32);
 	}
 
 	// Create a getter for my game object as this class is where it was initialised 

@@ -10,6 +10,7 @@ import static actions.Constant.Directions.right;
 import static actions.Constant.Directions.up;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,9 +22,12 @@ import main.Game;
 // Player class extends entity class
 public class Player extends entity{
 
+	public static int playerHeight;
+	public static int playerWidth;
+	
 	private BufferedImage[][] animations;
-	public Player(float x, float y, String type) {
-		super(x, y, type);
+	public Player(float x, float y, String type, float health, float damage) {
+		super(x, y, type, health, damage);
 		startAnimations();
 	}
 	
@@ -34,12 +38,12 @@ public class Player extends entity{
 	}
 	public void render(Graphics g)
 	{
-		int imageHeight = 64; 
-		int imageWidth = 64;
+		playerHeight = 64; 
+		playerWidth= 64;
 		// Use draw image on the target image to draw it to the screen
 		// We then specify its position, in this case it will be my x and y delta
 		// We then specify the width and height of the image with our variables 
-		g.drawImage(animations[playerAction][animationCurrent], (int)x, (int)y, imageHeight, imageWidth, null);
+		g.drawImage(animations[playerAction][animationCurrent], (int)x, (int)y, playerHeight, playerWidth, null);
 	}
 
 	private boolean leftMoving;
@@ -75,12 +79,7 @@ public class Player extends entity{
 		}
 	}
 	
-	
-	
-	public void setSpeed(float d)
-	{
-		playerSpeed = d;
-	}
+
 	
 	// Variable to keep track of if player is moving
 	private boolean playerMoving = false;
@@ -161,8 +160,26 @@ public class Player extends entity{
 	
 	public void CheckCollision()
 	{
-		Collisions.TouchingBlock(0, this);
-	 }
+		Collisions.TouchingBlock(0, this); // Call our touching block and pass in the block type we want to make sure we collide with 
+	}
+	
+	Rectangle r1 = new Rectangle();
+	Rectangle r2 = new Rectangle();
+	
+	public void CheckEnemy(Mob mob)
+	{
+		int posX = 0;
+		int posY = 0;
+		posX = (int) mob.x;
+		posY = (int) mob.y;
+		r1 = new Rectangle((int)this.x+16,(int)this.y+16,(int)this.playerHeight-32,(int)this.playerWidth-32);
+		r2 = new Rectangle(posY, posY,32,32);
+		// If player contacts a mob entity and is attacking do damage 
+		if(r1.intersects(r2) && playerAttacking)
+		{
+			mob.health -= this.damage;
+		}
+	}
 	
 	
 	// Getters and setters for the movement 

@@ -46,9 +46,6 @@ public class keyInputs implements KeyListener{
 		case KeyEvent.VK_D:
 			panel.getGame().getPlayer().setRight(true); // Set moving right to true 
 			break; 
-		case KeyEvent.VK_SHIFT:
-			panel.getGame().getPlayer().setSpeed(1);
-			break;
 		}
 		
 	}
@@ -70,9 +67,6 @@ public class keyInputs implements KeyListener{
 		case KeyEvent.VK_D:
 			panel.getGame().getPlayer().setRight(false); // Set moving right to false
 			break; 
-		case KeyEvent.VK_SHIFT:
-			panel.getGame().getPlayer().setSpeed(0.5f);
-			break;
 		}
 		
 	}
