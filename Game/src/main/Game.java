@@ -1,6 +1,10 @@
 package main;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Levels.LevelManager;
 import entitys.Collisions;
@@ -78,13 +82,28 @@ public class Game implements Runnable{
 		int currentTile = (32*currentY+currentX+1); // This formula takes the current x and y and returns the correct tile number
 		return currentTile;
 	}
+	// Array list to hold mobs current on screen
+	public static ArrayList<Mob> currentMobs = new ArrayList<Mob>();
 	
 	private void initialiseEntities() {
 		player = new Player(1,100, "Player",100,1); // Here we initialise our player and set the start position
 		levelManager = new LevelManager(this); // Here we initialise our level manager class
 		
 		
-		enemy1 = new Mob(200,200, "Player", 500,1);
+		// For loop to spawn random amount of enemy's in to the game 
+		Random rn = new Random();
+		int numberEnemys = 4 + rn.nextInt(9 - 4 + 1);
+		
+		for(int i =0; i< numberEnemys; i++)
+		{
+			// Loop though the length and spawn enemy's in at random position
+
+			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
+			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
+			currentMobs.add(new Mob(x,y, "Enemy", 500,1));
+		}
+		
+		
 	}
 	private void startGameLoop()
 	{
@@ -104,20 +123,26 @@ public class Game implements Runnable{
 		Collisions.update();
 		player.update(); // Here we call the update function in our player class
 		levelManager.update(); // Here we call the update function in our level manager class
-		
-		
+		for(int i =0; i < currentMobs.size(); i++)
+		{
+			currentMobs.get(i).update();
+		}
+	
 	}
 	public void render(Graphics g)
 	{
 		levelManager.render(g); // Here we call the render graphics from our level manager class
 		player.render(g); // Here we call the render graphics form our player class
-		
-		if(enemy1.AliveCheck() == true) // Only render enemy if alive
+		// Loop through our mobs array to render them all every frame
+		for(int i =0; i < currentMobs.size(); i++)
 		{
-			enemy1.render(g);
+
+			currentMobs.get(i).render(g);
 		}
+		
 
 	}
+	
 	
 	@Override
 	public void run() {

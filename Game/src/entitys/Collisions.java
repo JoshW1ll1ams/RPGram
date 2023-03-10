@@ -13,9 +13,14 @@ public class Collisions {
 	public static void update()
 	{
 		Game.player.CheckCollision();
-		Game.player.CheckEnemy(Game.enemy1);
+		
+		
 		//System.out.println(Game.CurrentTile());
 		
+		for(int i =0; i < Game.currentMobs.size(); i++)
+		{
+			Game.player.CheckEnemy(Game.currentMobs.get(i));
+		}
 		
 	}
 

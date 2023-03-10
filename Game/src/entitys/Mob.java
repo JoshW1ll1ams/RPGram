@@ -4,6 +4,9 @@ import static actions.Constant.Directions.getSpriteAmount;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Random;
+
+import main.Game;
 
 public class Mob extends entity{
 	
@@ -11,16 +14,103 @@ public class Mob extends entity{
 	public Mob(float x, float y, String type, float health, float damage) {
 		super(x, y, type, health, damage);
 		startAnimations();
+		
+		
 	}
 	
 		BufferedImage animation;
 
 		
-		public void update()
-		{
-		//  updatePostition();
-		//	updateAnimation();
+		public void update() {
+			updatePostition();
+			
 		}
+		
+		public double speed = 0.3;
+		int direction = 0;
+		int distance = 0;
+		Boolean moving = false;
+		Boolean movingDown = false;
+		Boolean movingUp = false;
+		Boolean movingLeft = false;
+		Boolean movingRight = false;
+		
+		private void updatePostition() {
+	
+			if(!moving)
+			{
+				Random rn = new Random();
+				direction = 0 + rn.nextInt(3 - 0 + 1);
+				distance = 0 + rn.nextInt(400 - 0 + 1);
+				moving = true;
+			}
+			
+			
+			if(direction == 0)
+			{
+				movingDown = true;
+			}
+			if(direction == 1)
+			{
+				movingUp = true;
+			}
+			if(direction == 2)
+			{
+				movingLeft = true;
+			}
+			if(direction == 3)
+			{
+				movingRight = true;
+			}
+	
+
+			
+			// If mob hits the right edge
+			if(this.x >= (Game.WindowWidth -32) - distance && movingRight)
+			{
+				movingRight = false;
+				moving = false;
+			}
+			// If the mob hits the left edge 
+			if(this.x <= 0 + distance && movingLeft)
+			{
+				movingLeft = false;
+				moving = false;
+			}
+			// If mob hits the bottom edge
+			if(this.y >= (Game.WindowHeight -32) - distance && movingDown)
+			{
+				movingDown = false;
+				moving = false;
+			}
+			// If the mob hits the top edge 
+			if(this.y <= 0 + distance && movingUp)
+			{
+				movingUp = false;
+				moving = false;
+			}
+			
+			
+			if(movingDown)
+			{
+				this.y += speed;
+			}
+			if(movingUp)
+			{
+				this.y -= speed;
+			}
+			if(movingRight)
+			{
+				this.x += speed;
+			}
+			if(movingLeft)
+			{
+				this.x -= speed;
+			}
+		}
+
+		
+		
 		
 		public boolean AliveCheck()
 		{
@@ -37,10 +127,13 @@ public class Mob extends entity{
 		public void render(Graphics g)
 		{
 			updateAnimation();
+
 			int imageHeight = 64; 
 			int imageWidth = 64;
-			g.drawImage(enemySprite[120+animationCurrent], (int)x, (int)y, 32, 32, null);
-		
+			if(AliveCheck() == true) // Only render enemy if alive
+			{
+				g.drawImage(enemySprite[120+animationCurrent], (int)x, (int)y, 32, 32, null);
+			}	
 		}
 		
 		private void startAnimations() 
@@ -78,4 +171,6 @@ public class Mob extends entity{
 				}
 			}
 		}
+
+
 }

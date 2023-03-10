@@ -168,16 +168,14 @@ public class Player extends entity{
 	
 	public void CheckEnemy(Mob mob)
 	{
-		int posX = 0;
-		int posY = 0;
-		posX = (int) mob.x;
-		posY = (int) mob.y;
-		r1 = new Rectangle((int)this.x+16,(int)this.y+16,(int)this.playerHeight-32,(int)this.playerWidth-32);
-		r2 = new Rectangle(posY, posY,32,32);
+
+		r1 = new Rectangle((int)this.x+16,(int)this.y+16,playerHeight-32,playerWidth-32);
+		r2 = new Rectangle((int)mob.x, (int)mob.y,32,32);
 		// If player contacts a mob entity and is attacking do damage 
 		if(r1.intersects(r2) && playerAttacking)
 		{
 			mob.health -= this.damage;
+			System.out.println(mob.health);
 		}
 	}
 	
