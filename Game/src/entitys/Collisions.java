@@ -62,5 +62,55 @@ public class Collisions {
 				}
 		}
 	}
+	public static void TouchingBlock(int BlockType, Mob mob)
+	{
+		
+		
+		// For each loop to search a map for a specific block and check if our player is touching the block
+		for (Integer i : Maps.GetBlock(Maps.map12, BlockType)) 
+		{
+
+				int x = ((i - 1) % 32)*32;
+				int y = ((i - 1) / 32)*32;
+				float posX = mob.x;
+				float posY = mob.y;
+				// Create two rectangles one player position and one in the target blocks position 
+				r1 = new Rectangle((int)mob.x+16,(int)mob.y+16,32,32);
+				Rectangle r2 = new Rectangle(x,y,32,32);
+				// If they intersect at different positions affect them accordingly 
+				if(r1.intersects(r2))
+				{
+					if(mob.movingDown == true)
+					{
+						mob.movingDown = false;
+						mob.moving = false;
+					}
+					if(mob.movingUp == true)
+					{
+						mob.movingUp = false;
+						mob.moving = false;
+					}
+					if(mob.movingLeft == true)
+					{
+						mob.movingLeft = false;
+						mob.moving = false;
+					}
+					if(mob.movingRight == true)
+					{
+						mob.movingRight = false;
+						mob.moving = false;
+					}
+						
+				
+					if(posX < x) mob.x = (float) (posX-0.5);
+					if(posX > x) mob.x = (float) (posX+0.5);
+					if(posY < y) mob.y = (float) (posY-0.5);
+					if(posY > y) mob.y = (float) (posY+0.5);
+				//	return true;
+				}
+			//return false;
+		}
+		//return false;
+	}
 
 }

@@ -99,21 +99,29 @@ public class Game implements Runnable{
 		
 		// For loop to spawn random amount of enemy's in to the game 
 		Random rn = new Random();
+		// Spawn 4 to 9 red enemies 
 		int numberEnemys = 4 + rn.nextInt(9 - 4 + 1);
-		
+
 		for(int i =0; i< numberEnemys; i++)
 		{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
 			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Enemy", 500,1,"Red Loot"));
+			currentMobs.add(new Mob(x,y, "Red Enemy", 500,1,"Red Loot"));
 		}	
 		for(int i =0; i< numberEnemys; i++)
 		{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
 			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Enemy", 500,1,"Green Loot"));
+			currentMobs.add(new Mob(x,y, "Green Enemy", 500,1,"Green Loot"));
+		}	
+		for(int i =0; i< numberEnemys; i++)
+		{
+			// Loop though the length and spawn enemy's in at random position
+			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
+			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
+			currentMobs.add(new Mob(x,y, "Blue Enemy", 500,1,"Blue Loot"));
 		}	
 		
 	}
@@ -139,8 +147,8 @@ public class Game implements Runnable{
 		for(int i =0; i < currentMobs.size(); i++)
 		{
 			currentMobs.get(i).update();
+			currentMobs.get(i).CheckCollision();
 		}
-	
 	}
 	public void render(Graphics g)
 	{

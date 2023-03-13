@@ -44,8 +44,7 @@ public class Mob extends entity{
 				distance = 0 + rn.nextInt(400 - 0 + 1);
 				moving = true;
 			}
-			
-			
+		
 			if(direction == 0)
 			{
 				movingDown = true;
@@ -66,7 +65,7 @@ public class Mob extends entity{
 
 			
 			// If mob hits the right edge
-			if(this.x >= (Game.WindowWidth -32) - distance && movingRight)
+			if(this.x >= (Game.WindowWidth -32) - distance && movingRight) 
 			{
 				movingRight = false;
 				moving = false;
@@ -152,16 +151,26 @@ public class Mob extends entity{
 			}
 		}
 		
+		
 		public void render(Graphics g)
 		{
+			// Check the type of mob and change its number in sprite sheet accordingly
+			int AnimationNum = 0;
+			if(this.type == "Red Enemy") AnimationNum = 120;
+			if(this.type == "Green Enemy") AnimationNum = 88;
+			if(this.type == "Blue Enemy") AnimationNum = 312;
 			updateAnimation();
 
 			int imageHeight = 64; 
 			int imageWidth = 64;
 			if(AliveCheck() == true) // Only render enemy if alive
 			{
-				g.drawImage(enemySprite[120+animationCurrent], (int)x, (int)y, 32, 32, null);
+				g.drawImage(enemySprite[AnimationNum+animationCurrent], (int)x, (int)y, 32, 32, null);
 			}	
+		}
+		public void CheckCollision()
+		{
+			Collisions.TouchingBlock(0, this); 
 		}
 		
 		private void startAnimations() 
