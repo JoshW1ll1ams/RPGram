@@ -11,6 +11,7 @@ import entitys.Collisions;
 import entitys.Mob;
 import entitys.Player;
 import entitys.entity;
+import entitys.inventory;
 
 // Implement the interface runnable to allow us to use multiple threads to avoid game lag
 // With multiple threads we can run more than one task at once
@@ -19,6 +20,11 @@ public class Game implements Runnable{
 	private Window GameWindow;
 	private Panel GamePanel;
 	private LevelManager levelManager;
+	
+	// Create out inventory 
+	public static inventory playerInv = new inventory();
+	
+	
 	
 	public final static int TileSize = 16; // Set the tile size for our game spites
 	public final static float Scale = 2.0f; // This will be the value we multiply with our tile size to get the true size
@@ -48,7 +54,8 @@ public class Game implements Runnable{
 		GameWindow = new Window(GamePanel);  
 		// This makes sure the game panel is ready to receive inputs 
 		GamePanel.requestFocus();
-		
+		// Add the inventory to our game panel
+		GamePanel.add(playerInv);
 		
 		// Start our game loop function
 		startGameLoop();
@@ -97,12 +104,17 @@ public class Game implements Runnable{
 		for(int i =0; i< numberEnemys; i++)
 		{
 			// Loop though the length and spawn enemy's in at random position
-
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
 			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Enemy", 500,1));
-		}
-		
+			currentMobs.add(new Mob(x,y, "Enemy", 500,1,"Red Loot"));
+		}	
+		for(int i =0; i< numberEnemys; i++)
+		{
+			// Loop though the length and spawn enemy's in at random position
+			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
+			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
+			currentMobs.add(new Mob(x,y, "Enemy", 500,1,"Green Loot"));
+		}	
 		
 	}
 	private void startGameLoop()
@@ -123,6 +135,7 @@ public class Game implements Runnable{
 		Collisions.update();
 		player.update(); // Here we call the update function in our player class
 		levelManager.update(); // Here we call the update function in our level manager class
+		// Here we loop though all mobs and update there logic 
 		for(int i =0; i < currentMobs.size(); i++)
 		{
 			currentMobs.get(i).update();
@@ -136,11 +149,9 @@ public class Game implements Runnable{
 		// Loop through our mobs array to render them all every frame
 		for(int i =0; i < currentMobs.size(); i++)
 		{
-
 			currentMobs.get(i).render(g);
 		}
-		
-
+		inventory.render(g);
 	}
 	
 	

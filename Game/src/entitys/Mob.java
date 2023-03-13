@@ -1,6 +1,6 @@
 package entitys;
 
-import static actions.Constant.Directions.getSpriteAmount;
+
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -10,20 +10,20 @@ import main.Game;
 
 public class Mob extends entity{
 	
-	private BufferedImage[] enemySprite;
-	public Mob(float x, float y, String type, float health, float damage) {
-		super(x, y, type, health, damage);
-		startAnimations();
+		private BufferedImage[] enemySprite;
+		private String LootType;
 		
-		
-	}
+		public Mob(float x, float y, String type, float health, float damage, String LootType) 
+		{
+			super(x, y, type, health, damage);
+			this.LootType = LootType;
+			startAnimations();
+		}
 	
 		BufferedImage animation;
-
-		
-		public void update() {
+		public void update() 
+		{
 			updatePostition();
-			
 		}
 		
 		public double speed = 0.3;
@@ -111,11 +111,18 @@ public class Mob extends entity{
 
 		
 		
-		
+		Boolean dead = false;
 		public boolean AliveCheck()
 		{
+
 			if(this.health <= 0)
 			{
+				if(dead == false)
+				{
+					 AddLoot();
+				dead = true;
+				}
+				
 				return false;
 			}
 			else
@@ -123,7 +130,28 @@ public class Mob extends entity{
 				return true;
 			}
 		}
-	
+		
+		public void AddLoot()
+		{
+			if(inventory.inv.size() <= 0)
+			{
+				inventory.inv.add(new item(LootType,1));
+				return;
+			}
+			else
+			{
+				for(int i=0;i < inventory.inv.size();i++)
+				{
+					if(inventory.inv.get(i).name == this.LootType)
+					{
+						inventory.inv.get(i).amount +=1;
+						return;
+					}
+				}
+				inventory.inv.add(new item(LootType,1));
+			}
+		}
+		
 		public void render(Graphics g)
 		{
 			updateAnimation();

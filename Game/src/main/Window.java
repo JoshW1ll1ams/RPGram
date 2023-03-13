@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 // Create class called window and make it extend JFrame
 public class Window extends JFrame{
 	
+
 	public  Window(Panel panel)
 	{
 		//frame = new JFrame();

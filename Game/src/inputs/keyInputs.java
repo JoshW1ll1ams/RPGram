@@ -1,15 +1,13 @@
 package inputs;
 
 
+
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import Levels.LevelManager; 
-import Levels.Maps;
-import entitys.Player;
-
-import static actions.Constant.Directions.*;
-
+import entitys.inventory;
+import main.Game;
 import main.Panel;
 // Implement key listener interface 
 public class keyInputs implements KeyListener{
@@ -29,6 +27,8 @@ public class keyInputs implements KeyListener{
 		
 	}
 
+	// Variable to hold weather inventory is on screen
+	Boolean inventoryOnScreen = false;
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
@@ -36,7 +36,7 @@ public class keyInputs implements KeyListener{
 		{
 		case KeyEvent.VK_W:
 			panel.getGame().getPlayer().setUp(true); // Set moving up to true 
-			break; 
+			break;
 		case KeyEvent.VK_A:
 			panel.getGame().getPlayer().setLeft(true); // Set moving left to true 
 			break; 
@@ -45,6 +45,21 @@ public class keyInputs implements KeyListener{
 			break; 
 		case KeyEvent.VK_D:
 			panel.getGame().getPlayer().setRight(true); // Set moving right to true 
+			break; 
+		case KeyEvent.VK_I:
+			// If I pressed and inventory on screen set it to invisible 
+			if(inventoryOnScreen == true)
+			{
+				Game.playerInv.setVisible(false);
+				inventoryOnScreen = false;
+			}
+			// If I pressed and inventory not on screen set it to visible 
+			else
+			{
+				Game.playerInv.setVisible(true);
+				Game.playerInv.update();
+				inventoryOnScreen = true;
+			}
 			break; 
 		}
 		

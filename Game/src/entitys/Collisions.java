@@ -19,11 +19,24 @@ public class Collisions {
 		
 		for(int i =0; i < Game.currentMobs.size(); i++)
 		{
-			Game.player.CheckEnemy(Game.currentMobs.get(i));
+			CheckEnemy(Game.currentMobs.get(i), Game.player);
 		}
 		
 	}
+	static Rectangle entity1 = new Rectangle();
+	static Rectangle entity2 = new Rectangle();
+	
+	public static void CheckEnemy(Mob mob, Player player)
+	{
 
+		entity1 = new Rectangle((int)player.x+16,(int)player.y+16,player.playerHeight-32,player.playerWidth-32);
+		entity2 = new Rectangle((int)mob.x, (int)mob.y,32,32);
+		// If player contacts a mob entity and is attacking do damage 
+		if(entity1.intersects(entity2) && player.playerAttacking)
+		{
+			mob.health -= player.damage;
+		}
+	}
 	public static void TouchingBlock(int BlockType, Player player)
 	{
 		

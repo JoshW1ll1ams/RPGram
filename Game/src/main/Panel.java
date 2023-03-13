@@ -1,15 +1,10 @@
 package main;
-import static actions.Constant.Directions.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import entitys.inventory;
 import inputs.keyInputs;
 import inputs.mouseInputs;
 
@@ -20,9 +15,12 @@ public class Panel extends JPanel{
 	private mouseInputs mouse;
 
 	private Game game;
-	
+
 	public Panel(Game game)
 	{
+		
+		
+		this.setLayout(null); 
 		// Initialise our mouse listener class and call the panel constructor in the listener class
 		mouse = new mouseInputs(this);
 		this.game = game;
@@ -46,10 +44,7 @@ public class Panel extends JPanel{
 	}
 	
 	
-	// Function to update the game, anything to do with logic will be called in this function
-	public void UpdateGame() {
-	}
-	
+
 	// This is automatically called every frame
 	public void paintComponent(Graphics g)
 	{
