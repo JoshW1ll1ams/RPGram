@@ -7,9 +7,9 @@ import entitys.Player;
 import entitys.entity;
 
 public class mainClass {
-
+	public static mainMenu menu;
 	public static void main(String[] args) {
-		mainMenu menu = new mainMenu();
+		menu = new mainMenu();
 		//Game game = new Game();
 	}
 }
