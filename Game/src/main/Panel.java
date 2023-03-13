@@ -32,8 +32,9 @@ public class Panel extends JPanel{
 		addMouseMotionListener(mouse);	
 		// Call our set panel size function
 		setPanelSize();
-
 	}
+	
+
 	// Function to set the sizing of our game panel
 	private void setPanelSize()
 	{

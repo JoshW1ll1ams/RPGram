@@ -3,8 +3,13 @@ package entitys;
 
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+import java.util.TimerTask;
+
+import javax.management.timer.Timer;
 
 import main.Game;
 
@@ -108,6 +113,18 @@ public class Mob extends entity{
 			}
 		}
 
+		// Function to check what loot colour hex code to use
+		public String lootLabelColor()
+		{
+			String redLootLabelColor = "#f5b0ab";
+			String greenLootLabelColor = "#90e64e";
+			String blueLootLabelColor = "#4e9fe6";
+			if(this.LootType == "Red Gem") return redLootLabelColor;
+			if(this.LootType == "Green Gem") return greenLootLabelColor;
+			if(this.LootType == "Blue Gem") return blueLootLabelColor;
+			return null;
+		}
+		
 		
 		
 		Boolean dead = false;
@@ -118,8 +135,17 @@ public class Mob extends entity{
 			{
 				if(dead == false)
 				{
-					 AddLoot();
-				dead = true;
+				// Add the loot to the player inventory 
+				AddLoot();
+				// Create a label that displays the loot type gained and in the relevant colour
+				popUp lootPopUp = new popUp(this.LootType,lootLabelColor());
+				
+				// Get index of current enemy and remove from the mob array list 
+				int arrayIndex = Game.currentMobs.indexOf(this);
+				Game.currentMobs.remove(arrayIndex);
+				
+			
+				dead = true;	
 				}
 				
 				return false;
@@ -129,6 +155,9 @@ public class Mob extends entity{
 				return true;
 			}
 		}
+		
+		
+		
 		
 		public void AddLoot()
 		{

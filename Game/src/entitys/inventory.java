@@ -77,9 +77,9 @@ public class inventory extends JPanel {
 	        {
 	        	
 	        	// Set the loot colour to the relevant colour type
-	        	if(inv.get(i).name.equals("Red Loot")) lootColor = redLoot;
-	        	if(inv.get(i).name.equals("Green Loot")) lootColor = greenLoot;
-	        	if(inv.get(i).name.equals("Blue Loot")) lootColor = blueLoot;
+	        	if(inv.get(i).name.equals("Red Gem")) lootColor = redLoot;
+	        	if(inv.get(i).name.equals("Green Gem")) lootColor = greenLoot;
+	        	if(inv.get(i).name.equals("Blue Gem")) lootColor = blueLoot;
 	        	
 	        	// Create new label that is the string of the amount of the item we have
 	        	JLabel label = new JLabel(String.valueOf(inv.get(i).amount));

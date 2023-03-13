@@ -12,13 +12,14 @@ import entitys.Mob;
 import entitys.Player;
 import entitys.entity;
 import entitys.inventory;
+import entitys.popUp;
 
 // Implement the interface runnable to allow us to use multiple threads to avoid game lag
 // With multiple threads we can run more than one task at once
 public class Game implements Runnable{
 	
 	private Window GameWindow;
-	private Panel GamePanel;
+	public static Panel GamePanel;
 	private LevelManager levelManager;
 	
 	// Create out inventory 
@@ -47,7 +48,6 @@ public class Game implements Runnable{
 	{
 		// Initialise game entities before anything else
 		initialiseEntities();
-		System.out.println(WindowWidth);
 		// Create a new instance of panel class that will be our main game panel
 		GamePanel = new Panel(this);
 		// Create a new instance of window class that will be our main game window 
@@ -56,11 +56,12 @@ public class Game implements Runnable{
 		GamePanel.requestFocus();
 		// Add the inventory to our game panel
 		GamePanel.add(playerInv);
-		
 		// Start our game loop function
 		startGameLoop();
 		
 	}
+	
+	
 	
 	// Function to return the current tile the player is on
 	public static int CurrentTile()
@@ -107,21 +108,21 @@ public class Game implements Runnable{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
 			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Red Enemy", 500,1,"Red Loot"));
+			currentMobs.add(new Mob(x,y, "Red Enemy", 500,1,"Red Gem"));
 		}	
 		for(int i =0; i< numberEnemys; i++)
 		{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
 			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Green Enemy", 500,1,"Green Loot"));
+			currentMobs.add(new Mob(x,y, "Green Enemy", 500,1,"Green Gem"));
 		}	
 		for(int i =0; i< numberEnemys; i++)
 		{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
 			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Blue Enemy", 500,1,"Blue Loot"));
+			currentMobs.add(new Mob(x,y, "Blue Enemy", 500,1,"Blue Gem"));
 		}	
 		
 	}

@@ -4,17 +4,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JPanel;
+
 import main.Panel;
 
 public class mouseInputs implements MouseListener, MouseMotionListener {
 
 	// Import our panel from the panel class
 	private Panel panel;
+
 	// Create a constructor for our key inputs to change a value within the panel class
 	public mouseInputs(Panel panel)
 	{
 		this.panel = panel;
 	}
+
 	@Override
 	public void mouseDragged(MouseEvent e) {
 
