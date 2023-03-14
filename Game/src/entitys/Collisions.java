@@ -42,7 +42,7 @@ public class Collisions {
 		
 		
 		// For each loop to search a map for a specific block and check if our player is touching the block
-		for (Integer i : Maps.GetBlock(Maps.map12, BlockType)) 
+		for (Integer i : Maps.GetBlock(Game.currentMap, BlockType)) 
 		{
 
 				int x = ((i - 1) % 32)*32;
@@ -67,7 +67,7 @@ public class Collisions {
 		
 		
 		// For each loop to search a map for a specific block and check if our player is touching the block
-		for (Integer i : Maps.GetBlock(Maps.map12, BlockType)) 
+		for (Integer i : Maps.GetBlock(Game.currentMap, BlockType)) 
 		{
 
 				int x = ((i - 1) % 32)*32;

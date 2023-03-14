@@ -18,7 +18,7 @@ import entitys.popUp;
 // With multiple threads we can run more than one task at once
 public class Game implements Runnable{
 	
-	private Window GameWindow;
+	public static Window GameWindow;
 	public static Panel GamePanel;
 	private LevelManager levelManager;
 	
@@ -44,8 +44,13 @@ public class Game implements Runnable{
 	
 	public static Mob enemy1;
 
-	public Game()
+	public static int[] currentMap;
+	
+	public Game(int[] map)
 	{
+		// Reset level before loading it again
+		ResetLevel();
+		this.currentMap = map;
 		// Initialise game entities before anything else
 		initialiseEntities();
 		// Create a new instance of panel class that will be our main game panel
@@ -163,6 +168,10 @@ public class Game implements Runnable{
 		inventory.render(g);
 	}
 	
+	public void ResetLevel()
+	{
+		currentMobs.clear();
+	}
 	
 	@Override
 	public void run() {

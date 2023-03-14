@@ -4,8 +4,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+import Levels.Maps;
 import entitys.inventory;
 import inputs.keyInputs;
+import inputs.menuButton;
 import inputs.mouseInputs;
 
 //Create class called panel and make it extend JPanel
@@ -18,9 +20,10 @@ public class Panel extends JPanel{
 
 	public Panel(Game game)
 	{
-		
-		
+
+		menuButton mainMenuButton = new menuButton("Main menu",100,20,5,5,"#f1350d","Menu",Maps.levelnull);
 		this.setLayout(null); 
+		this.add(mainMenuButton);
 		// Initialise our mouse listener class and call the panel constructor in the listener class
 		mouse = new mouseInputs(this);
 		this.game = game;

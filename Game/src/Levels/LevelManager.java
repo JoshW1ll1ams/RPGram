@@ -36,7 +36,7 @@ public class LevelManager {
 	}
 
 
-	static int[] map = Maps.map12; // Set the default map 
+	static int[] map = Game.currentMap; // Set the default map 
 	public void render(Graphics g)
 	{
 		int counter = 0; // Set a counter to track the mapping index
