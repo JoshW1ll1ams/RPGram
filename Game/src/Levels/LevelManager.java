@@ -67,7 +67,6 @@ public class LevelManager {
 	public static int[] SetCurrentMap(int[] map)
 	{
 		return LevelManager.map = map; // Set the current map to the map we pass into the setter function 
-		//			LevelManager.SetCurrentMap(Maps.map2);    	USED TO CHANGE CURRENT MAP
 	}
 		
 }

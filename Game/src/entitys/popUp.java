@@ -23,11 +23,22 @@ public class popUp extends JLabel{
 		this.setSize(600,200);
 		Game.GamePanel.add(this);
 		// Call our timer function and pass in our popUp
-		Timer(this);
+		Timer(this, 2);
+	}
+	// Pop up for death message 
+	public popUp(String message)
+	{
+		this.setText(message);
+		this.setForeground(Color.red);
+		this.setFont(new Font("Arial Black", Font.PLAIN, 70));
+		this.setLocation(400, 100);
+		this.setSize(600,200);
+		Game.GamePanel.add(this);
+		Timer(this, 5);
 	}
 	
 	
-	public void Timer(popUp pop)
+	public void Timer(popUp pop, int timerLength)
 	{
 		  Timer timer = new Timer();
 		    
@@ -38,13 +49,11 @@ public class popUp extends JLabel{
 				public void run() {
 					// After 3 seconds set label to invisible
 					pop.setVisible(false);
-					//pop.remove(pop);
-					
 				}
 		    	
 		    };
 		    // This links the timer and the timer task, and triggers the run after 3 seconds
-			timer.schedule(task,3000);
+			timer.schedule(task,timerLength*1000);
 				
 	}
 }

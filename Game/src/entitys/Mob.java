@@ -18,7 +18,7 @@ public class Mob extends entity{
 		private BufferedImage[] enemySprite;
 		private String LootType;
 		
-		public Mob(float x, float y, String type, float health, float damage, String LootType) 
+		public Mob(float x, float y, String type, float health, double damage, String LootType) 
 		{
 			super(x, y, type, health, damage);
 			this.LootType = LootType;
@@ -68,7 +68,6 @@ public class Mob extends entity{
 			}
 	
 
-			
 			// If mob hits the right edge
 			if(this.x >= (Game.WindowWidth -32) - distance && movingRight) 
 			{

@@ -7,9 +7,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Levels.LevelManager;
+import Levels.Maps;
 import entitys.Collisions;
 import entitys.Mob;
 import entitys.Player;
+import entitys.QuestionScreen;
 import entitys.entity;
 import entitys.inventory;
 import entitys.popUp;
@@ -17,15 +19,17 @@ import entitys.popUp;
 // Implement the interface runnable to allow us to use multiple threads to avoid game lag
 // With multiple threads we can run more than one task at once
 public class Game implements Runnable{
-	
+
 	public static Window GameWindow;
 	public static Panel GamePanel;
 	private LevelManager levelManager;
+
+	
 	
 	// Create out inventory 
 	public static inventory playerInv = new inventory();
 	
-	
+	public static QuestionScreen questions = new QuestionScreen();
 	
 	public final static int TileSize = 16; // Set the tile size for our game spites
 	public final static float Scale = 2.0f; // This will be the value we multiply with our tile size to get the true size
@@ -36,20 +40,18 @@ public class Game implements Runnable{
 	public final static int WindowHeight = TrueTileSize*TotalTileHeight;// Here we multiply true tile size with amount of tiles on the y axis to get true window height 
 	
 	//Here we create our game loop thread
-	private Thread GameLoop;
+	public static Thread GameLoop;
 	
 	// Here we create an instance of our player class 
 	public static Player player;
 	
 	
-	public static Mob enemy1;
 
 	public static int[] currentMap;
 	
 	public Game(int[] map)
 	{
-		// Reset level before loading it again
-		ResetLevel();
+
 		this.currentMap = map;
 		// Initialise game entities before anything else
 		initialiseEntities();
@@ -61,6 +63,8 @@ public class Game implements Runnable{
 		GamePanel.requestFocus();
 		// Add the inventory to our game panel
 		GamePanel.add(playerInv);
+		// Add the question panel to main screen
+		GamePanel.add(questions);
 		// Start our game loop function
 		startGameLoop();
 		
@@ -99,35 +103,37 @@ public class Game implements Runnable{
 	public static ArrayList<Mob> currentMobs = new ArrayList<Mob>();
 	
 	private void initialiseEntities() {
-		player = new Player(1,100, "Player",100,1); // Here we initialise our player and set the start position
+
 		levelManager = new LevelManager(this); // Here we initialise our level manager class
-		
-		
+		player = new Player(1,100, "Player",100,1); 
+	}
+	
+	public static void  initialiseMobs()
+	{
 		// For loop to spawn random amount of enemy's in to the game 
 		Random rn = new Random();
 		// Spawn 4 to 9 red enemies 
-		int numberEnemys = 4 + rn.nextInt(9 - 4 + 1);
-
+		int numberEnemys = Maps.numberMobs[0] + rn.nextInt(Maps.numberMobs[1] - Maps.numberMobs[0] + 1);
 		for(int i =0; i< numberEnemys; i++)
 		{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
 			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Red Enemy", 500,1,"Red Gem"));
+			currentMobs.add(new Mob(x,y, "Red Enemy", 200,0.1,"Red Gem"));
 		}	
 		for(int i =0; i< numberEnemys; i++)
 		{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
 			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Green Enemy", 500,1,"Green Gem"));
+			currentMobs.add(new Mob(x,y, "Green Enemy", 200,0.1,"Green Gem"));
 		}	
 		for(int i =0; i< numberEnemys; i++)
 		{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
 			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Blue Enemy", 500,1,"Blue Gem"));
+			currentMobs.add(new Mob(x,y, "Blue Enemy", 200,0.1,"Blue Gem"));
 		}	
 		
 	}
@@ -146,6 +152,7 @@ public class Game implements Runnable{
 	
 	public void Update()
 	{
+		
 		Collisions.update();
 		player.update(); // Here we call the update function in our player class
 		levelManager.update(); // Here we call the update function in our level manager class
@@ -167,12 +174,7 @@ public class Game implements Runnable{
 		}
 		inventory.render(g);
 	}
-	
-	public void ResetLevel()
-	{
-		currentMobs.clear();
-	}
-	
+
 	@Override
 	public void run() {
 		

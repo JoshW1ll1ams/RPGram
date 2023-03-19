@@ -20,6 +20,22 @@ public class inventory extends JPanel {
 
 	static ArrayList<item> inv = new ArrayList<item>();
 	
+	// Create a constructor for the inventory 
+	public inventory()
+	{
+		startAnimations();
+		this.setBackground(Color.GRAY);
+		this.setLocation(400, 40);
+		this.setSize(200, 400);
+		this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		grid.setHgap(5); // set horizontal gap to 10 pixels
+		grid.setVgap(5); // set vertical gap to 10 pixels
+		this.setLayout(grid); 
+		//Slots();
+		this.setVisible(false);
+	}
+	
+	
 	
 	// Here we have variables and functions to loop though my items image sprite to pick out 3 loot types
 	static BufferedImage[][] InventoryIcons;
@@ -49,21 +65,7 @@ public class inventory extends JPanel {
 		Slots();
 	}
 	
-	// Create a constructor for the inventory 
-	public inventory()
-	{
-		startAnimations();
-		this.setBackground(Color.GRAY);
-		this.setLocation(400, 40);
-		this.setSize(200, 400);
-		this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		grid.setHgap(5); // set horizontal gap to 10 pixels
-		grid.setVgap(5); // set vertical gap to 10 pixels
-		this.setLayout(grid); 
-		//Slots();
-		this.setVisible(false);
-	}
-	
+
 	
 	// Create the 18 slots to hold items and propagate them with icons if the player has them in the inventory
 	public void Slots() {

@@ -5,20 +5,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 
 import Levels.Maps;
+import entitys.Player;
 import main.Game;
+
 import main.mainClass;
 import main.mainMenu;
 
 public class menuButton extends JButton implements ActionListener {
 
 	String function;
-	int[] map;
-    public menuButton(String text,int sizeX,int sizeY, int POSX,int POSY, String color, String function, int[] map) {
+	int MobNum;
+    public menuButton(String text,int sizeX,int sizeY, int POSX,int POSY, String color, String function, int MobNum) {
      
-    	this.map = map;
+
         this.addActionListener(this);
         this.setSize(sizeX, sizeY);
         this.setText(text);
@@ -28,18 +29,23 @@ public class menuButton extends JButton implements ActionListener {
         this.setFocusPainted(false);
         this.function = function;
         this.setVisible(true);
+        this.MobNum = MobNum;
 
     }
-    Game game;
+    
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this) {
         	if(this.function == "Level")
         	{
-        		game = null;
-        		// Remove all menu items when user clicks level button
-        		mainClass.menu.dispose();
-        		// Create new instance of a game and pass in the correct map
-        		game = new Game(this.map);
+        		Game.player.health = 500;
+        		Game.player.resetMovement();
+        		Game.GameWindow.setVisible(true);
+        		mainClass.menu.setVisible(false);
+        		// Remove all menu items when user clicks level button  
+        		Maps.mobs(this.MobNum);
+        		Game.initialiseMobs();
+        		Game.GamePanel.requestFocus();
+        		
         		
         	}
         	if(this.function == "Exit")
@@ -48,8 +54,9 @@ public class menuButton extends JButton implements ActionListener {
         	}
         	if(this.function == "Menu")
         	{
-        		mainClass.menu = new mainMenu();
-        		Game.GameWindow.dispose();
+        		Game.GameWindow.setVisible(false);
+        		Game.currentMobs.clear();
+        		mainClass.menu.setVisible(true);
         		
         	}
           

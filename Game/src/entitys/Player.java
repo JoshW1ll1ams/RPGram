@@ -19,6 +19,7 @@ public class Player extends entity{
 	
 	public void update()
 	{
+		CheckAlive();
 		updatePostition();
 		updateAnimation();
 	}
@@ -50,18 +51,10 @@ public class Player extends entity{
 		{
 			switch(PlayerAction)
 			{
-			case left:
-				return 5 + playerAttackingAdd; // If player is attacking this number will be added to extend the range of the animation to invlove the attacking sprites
-			case up:
-				return 5 + playerAttackingAdd;
-			case right:
-				return 5 + playerAttackingAdd;
-			case down:
-				return 5 + playerAttackingAdd;
 			case idle:
 				return 2 + playerAttackingAdd;
 			default:
-				return 5;
+				return 5 + playerAttackingAdd;
 			}
 		}
 	private int playerAction = idle; 
@@ -75,7 +68,7 @@ public class Player extends entity{
 	
 	// Function to update our animation continuously 
 	private void updateAnimation() {
-		
+
 		animationFrames++; // Every frame this will increase by one 
 		if(animationFrames >= animationSpeed) // We check for when the amount of frames is equal to our speed, this is the point we want to change the animation 
 		{
@@ -165,14 +158,25 @@ public class Player extends entity{
 		
 	}
 
-	
 	public void CheckCollision()
 	{
 		Collisions.TouchingBlock(0, this); // Call our touching block and pass in the block type we want to make sure we collide with 
 	}
 	
+	Boolean dead = false;
 
+	public void CheckAlive()
+	{
+		if(this.health <= 0 && dead==false)
+		{
+			dead = true;
+			Game.currentMobs.clear();
+			this.canMove = false;
+			// Create popup message for player when they die
+			popUp deathMessage = new popUp("DEAD!");
 	
+		}
+	}
 	
 	// Getters and setters for the movement 
 	public void setAttack(boolean attacking) {
@@ -211,6 +215,8 @@ public class Player extends entity{
 	public void setDown(boolean down) {
 		this.downMoving = down;
 	}
+
+
 
 
 	

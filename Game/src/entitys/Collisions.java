@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Random;
 
 import Levels.Maps;
 import main.Game;
@@ -12,7 +13,13 @@ public class Collisions {
 	public static Rectangle r1 = new Rectangle();
 	public static void update()
 	{
-		Game.player.CheckCollision();
+		
+		
+		try {
+			Game.player.CheckCollision();
+		} catch (NullPointerException e) {
+		    System.out.println("Player is null");
+		}
 		
 		
 		//System.out.println(Game.CurrentTile());
@@ -25,17 +32,29 @@ public class Collisions {
 	}
 	static Rectangle entity1 = new Rectangle();
 	static Rectangle entity2 = new Rectangle();
-	
+	static Random rn = new Random();
+	static int knockbackDistance = 5;
 	public static void CheckEnemy(Mob mob, Player player)
 	{
-
-		entity1 = new Rectangle((int)player.x+16,(int)player.y+16,player.playerHeight-32,player.playerWidth-32);
+		// Pick a random direction to send the player if a mob is touching them
+		int direction = 0 + rn.nextInt(4 -0 + 1);
+		
+		entity1 = new Rectangle((int)player.x+16,(int)player.y+16,Player.playerHeight-32,Player.playerWidth-32);
 		entity2 = new Rectangle((int)mob.x, (int)mob.y,32,32);
 		// If player contacts a mob entity and is attacking do damage 
 		if(entity1.intersects(entity2) && player.playerAttacking)
 		{
 			mob.health -= player.damage;
 		}
+		if(entity1.intersects(entity2))
+		{
+			player.health -= mob.damage;
+			if(direction == 0)player.x+=knockbackDistance;
+			if(direction == 1)player.x-=knockbackDistance;
+			if(direction == 2)player.y+=knockbackDistance;
+			if(direction == 3)player.y-=knockbackDistance;
+		}
+	
 	}
 	public static void TouchingBlock(int BlockType, Player player)
 	{
@@ -50,7 +69,7 @@ public class Collisions {
 				float posX = Game.player.x;
 				float posY = Game.player.y;
 				// Create two rectangles one player position and one in the target blocks position 
-				r1 = new Rectangle((int)Game.player.x+16,(int)Game.player.y+16,(int)Game.player.playerHeight-32,(int)Game.player.playerWidth-32);
+				r1 = new Rectangle((int)Game.player.x+16,(int)Game.player.y+16,(int)Player.playerHeight-32,(int)Player.playerWidth-32);
 				Rectangle r2 = new Rectangle(x,y,32,32);
 				// If they intersect at different positions affect them accordingly 
 				if(r1.intersects(r2))
@@ -106,11 +125,8 @@ public class Collisions {
 					if(posX > x) mob.x = (float) (posX+0.5);
 					if(posY < y) mob.y = (float) (posY-0.5);
 					if(posY > y) mob.y = (float) (posY+0.5);
-				//	return true;
 				}
-			//return false;
 		}
-		//return false;
 	}
 
 }

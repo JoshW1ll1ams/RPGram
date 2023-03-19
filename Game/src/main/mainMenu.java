@@ -50,13 +50,13 @@ public class mainMenu extends JFrame{
 		menupanel.setLayout(null);
 		
 		// Create a button for each level and pass in the corresponding map
-		menuButton level1 = new menuButton("Level 1",200,50,400,25,"#d9c389","Level",Maps.level1);
-		menuButton level2 = new menuButton("Level 2",200,50,400,100,"#d9c389","Level",Maps.level2);
-		menuButton level3 = new menuButton("Level 3",200,50,400,175,"#d9c389","Level",Maps.level1);
-		menuButton level4 = new menuButton("Level 4",200,50,400,250,"#d9c389","Level",Maps.level1);
-		menuButton level5 = new menuButton("Level 5",200,50,400,325,"#d9c389","Level",Maps.level1);
-		menuButton level6 = new menuButton("Level 6",200,50,400,400,"#d9c389","Level",Maps.level1);
-		menuButton exitGame = new menuButton("Exit Game",200,30,400,465,"#f1350d","Exit",Maps.levelnull);
+		menuButton level1 = new menuButton("Level 1",200,50,400,25,"#d9c389","Level",1);
+		menuButton level2 = new menuButton("Level 2",200,50,400,100,"#d9c389","Level",2);
+		menuButton level3 = new menuButton("Level 3",200,50,400,175,"#d9c389","Level",3);
+		menuButton level4 = new menuButton("Level 4",200,50,400,250,"#d9c389","Level",4);
+		menuButton level5 = new menuButton("Level 5",200,50,400,325,"#d9c389","Level",5);
+		menuButton level6 = new menuButton("Level 6",200,50,400,400,"#d9c389","Level",6);
+		menuButton exitGame = new menuButton("Exit Game",200,30,400,465,"#f1350d","Exit",-1);
 		menupanel.add(level1);
 		menupanel.add(level2);
 		menupanel.add(level3);
@@ -70,8 +70,6 @@ public class mainMenu extends JFrame{
         imageIcon.setSize(Game.WindowWidth,Game.WindowHeight);
         imageIcon.setLocation(0, 0);
         menupanel.add(imageIcon);
-		
-		
 	}
 	
 
