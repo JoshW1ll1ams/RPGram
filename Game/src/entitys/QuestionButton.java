@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import main.Game;
+import main.mainClass;
+
 public class QuestionButton extends JButton implements ActionListener{
 	
 	String text;
@@ -31,11 +34,21 @@ public class QuestionButton extends JButton implements ActionListener{
         	if(this.questionNUm == QuestionScreen.correctAwnser)
         	{
         		System.out.println("Correct");
+    			Game.player.dead = false;
+    			Game.player.canMove = true;
+    			Game.questions.setVisible(false);	
+    			Game.player.health = 500;
+    			Game.GamePanel.requestFocus();
         	}
         	else
         	{
         		System.out.println("Incorrect");
+        		Game.currentMobs.clear();
+        		Game.GamePanel.setVisible(false);
+        		mainClass.menu.setVisible(true);
         	}
+        	Game.questions.setVisible(false);
+        
         }
     }
 }

@@ -170,11 +170,8 @@ public class Player extends entity{
 		if(this.health <= 0 && dead==false)
 		{
 			dead = true;
-			Game.currentMobs.clear();
+			Game.questions.setVisible(true);	
 			this.canMove = false;
-			// Create popup message for player when they die
-			popUp deathMessage = new popUp("DEAD!");
-	
 		}
 	}
 	

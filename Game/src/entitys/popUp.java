@@ -31,10 +31,11 @@ public class popUp extends JLabel{
 		this.setText(message);
 		this.setForeground(Color.red);
 		this.setFont(new Font("Arial Black", Font.PLAIN, 70));
-		this.setLocation(400, 100);
+		this.setLocation(400, 10);
 		this.setSize(600,200);
 		Game.GamePanel.add(this);
 		Timer(this, 5);
+		
 	}
 	
 	

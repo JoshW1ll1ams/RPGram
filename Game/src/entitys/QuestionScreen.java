@@ -50,7 +50,7 @@ public class QuestionScreen extends JPanel{
 		this.setLocation(250, 40);
 		this.setSize(500, 400);
 		this.setLayout(null); 
-		this.setVisible(true);
+		this.setVisible(false);
 	}
 	
 

@@ -39,11 +39,13 @@ public class menuButton extends JButton implements ActionListener {
         	{
         		Game.player.health = 500;
         		Game.player.resetMovement();
-        		Game.GameWindow.setVisible(true);
         		mainClass.menu.setVisible(false);
+        		Game.GameWindow.setVisible(true);
+        		Game.GamePanel.setVisible(true);
         		// Remove all menu items when user clicks level button  
         		Maps.mobs(this.MobNum);
         		Game.initialiseMobs();
+        		Game.GameWindow.requestFocus();
         		Game.GamePanel.requestFocus();
         		
         		
