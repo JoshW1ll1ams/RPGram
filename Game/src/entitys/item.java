@@ -1,8 +1,8 @@
 package entitys;
 
 public class item {
-	String name;
-	int amount;
+	public String name;
+	public int amount;
 	public item(String name, int amount)
 	{
 		this.name = name;

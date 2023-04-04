@@ -198,7 +198,10 @@ public class Mob extends entity{
 		}
 		public void CheckCollision()
 		{
-			Collisions.TouchingBlock(0, this); 
+			Collisions.TouchingBlock(34, this); 
+			Collisions.TouchingBlock(37, this);
+			Collisions.TouchingBlock(628, this);
+			Collisions.TouchingBlock(357, this);
 		}
 		
 		private void startAnimations() 

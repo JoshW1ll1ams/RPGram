@@ -39,16 +39,19 @@ public class QuestionButton extends JButton implements ActionListener{
     			Game.questions.setVisible(false);	
     			Game.player.health = 500;
     			Game.GamePanel.requestFocus();
+    			popUp Correct = new popUp("Correct, Health set to 500",Color.green,1);
         	}
         	else
         	{
-        		System.out.println("Incorrect");
-        		Game.currentMobs.clear();
-        		Game.GamePanel.setVisible(false);
-        		mainClass.menu.setVisible(true);
+        		System.out.println("Correct");
+    			Game.player.dead = false;
+    			Game.player.canMove = true;
+    			Game.questions.setVisible(false);	
+    			Game.player.health = 200;
+    			Game.GamePanel.requestFocus();
+    			popUp inCorrect = new popUp("Incorrect, Health set to 200",Color.red,1);
         	}
-        	Game.questions.setVisible(false);
-        
+       
         }
     }
 }

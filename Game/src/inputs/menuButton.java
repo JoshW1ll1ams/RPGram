@@ -47,8 +47,6 @@ public class menuButton extends JButton implements ActionListener {
         		Game.initialiseMobs();
         		Game.GameWindow.requestFocus();
         		Game.GamePanel.requestFocus();
-        		
-        		
         	}
         	if(this.function == "Exit")
         	{

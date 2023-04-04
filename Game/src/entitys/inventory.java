@@ -18,7 +18,7 @@ public class inventory extends JPanel {
 	GridLayout grid = new GridLayout(6,3);
 	
 
-	static ArrayList<item> inv = new ArrayList<item>();
+	public static ArrayList<item> inv = new ArrayList<item>();
 	
 	// Create a constructor for the inventory 
 	public inventory()
@@ -31,7 +31,6 @@ public class inventory extends JPanel {
 		grid.setHgap(5); // set horizontal gap to 10 pixels
 		grid.setVgap(5); // set vertical gap to 10 pixels
 		this.setLayout(grid); 
-		//Slots();
 		this.setVisible(false);
 	}
 	

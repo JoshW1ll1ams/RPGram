@@ -160,7 +160,10 @@ public class Player extends entity{
 
 	public void CheckCollision()
 	{
-		Collisions.TouchingBlock(0, this); // Call our touching block and pass in the block type we want to make sure we collide with 
+		Collisions.TouchingBlock(34, this); // Call our touching block and pass in the block type we want to make sure we collide with 
+		Collisions.TouchingBlock(37, this);
+		Collisions.TouchingBlock(628, this);
+		Collisions.TouchingBlock(357, this);
 	}
 	
 	Boolean dead = false;

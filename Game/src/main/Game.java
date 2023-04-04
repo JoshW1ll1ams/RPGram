@@ -118,25 +118,67 @@ public class Game implements Runnable{
 		{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
-			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Red Enemy", 200,0.1,"Red Gem"));
+			currentMobs.add(new Mob(x,100, "Red Enemy", 200,0.1,"Red Gem"));
 		}	
 		for(int i =0; i< numberEnemys; i++)
 		{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
-			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Green Enemy", 200,0.1,"Green Gem"));
+			currentMobs.add(new Mob(x,200, "Green Enemy", 200,0.1,"Green Gem"));
 		}	
 		for(int i =0; i< numberEnemys; i++)
 		{
 			// Loop though the length and spawn enemy's in at random position
 			int x = 0 + rn.nextInt(WindowWidth - 0 + 1);
-			int y = 0 + rn.nextInt(WindowHeight - 0 + 1);
-			currentMobs.add(new Mob(x,y, "Blue Enemy", 200,0.1,"Blue Gem"));
+			currentMobs.add(new Mob(x,250, "Blue Enemy", 200,0.1,"Blue Gem"));
 		}	
 		
 	}
+	
+	private void CheckLevelUnlock()
+	{
+		int currentGreen = 0;
+		int currentBlue = 0;
+		int currentRed = 0;
+		
+		for(int i=0;i < playerInv.inv.size();i++)
+		{
+			if(playerInv.inv.get(i).name == "Green Gem")
+			{
+				currentGreen = playerInv.inv.get(i).amount;
+			}
+			if(playerInv.inv.get(i).name == "Red Gem")
+			{
+				currentBlue = playerInv.inv.get(i).amount;
+			}
+			if(playerInv.inv.get(i).name == "Blue Gem")
+			{
+				currentRed = playerInv.inv.get(i).amount;
+			}
+		}
+		if(currentGreen >= 3 && currentBlue >= 3 && currentRed >= 3)
+		{
+			mainMenu.level2.setEnabled(true);
+		}
+		if(currentGreen >= 5 && currentBlue >= 5 && currentRed >= 5)
+		{
+			mainMenu.level3.setEnabled(true);
+		}
+		if(currentGreen >= 10 && currentBlue >= 10 && currentRed >= 10)
+		{
+			mainMenu.level4.setEnabled(true);
+		}
+		if(currentGreen >= 20 && currentBlue >= 20 && currentRed >= 20)
+		{
+			mainMenu.level5.setEnabled(true);
+		}
+		if(currentGreen >= 30 && currentBlue >= 30 && currentRed >= 30)
+		{
+			mainMenu.level6.setEnabled(true);
+		}
+	}
+	
+
 	private void startGameLoop()
 	{
 		// Here we assign our game loop to a new thread
@@ -162,6 +204,7 @@ public class Game implements Runnable{
 			currentMobs.get(i).update();
 			currentMobs.get(i).CheckCollision();
 		}
+		CheckLevelUnlock();
 	}
 	public void render(Graphics g)
 	{

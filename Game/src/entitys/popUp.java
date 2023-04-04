@@ -26,15 +26,15 @@ public class popUp extends JLabel{
 		Timer(this, 2);
 	}
 	// Pop up for death message 
-	public popUp(String message)
+	public popUp(String message, Color color,int num)
 	{
 		this.setText(message);
-		this.setForeground(Color.red);
-		this.setFont(new Font("Arial Black", Font.PLAIN, 70));
-		this.setLocation(400, 10);
+		this.setForeground(color);
+		this.setFont(new Font("Arial Black", Font.PLAIN, 30));
+		this.setLocation(240, 10);
 		this.setSize(600,200);
 		Game.GamePanel.add(this);
-		Timer(this, 5);
+		Timer(this, 3);
 		
 	}
 	
