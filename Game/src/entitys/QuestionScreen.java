@@ -11,29 +11,29 @@ import inputs.menuButton;
 
 public class QuestionScreen extends JPanel{
 	
-	String questionString;
-	String awnser1String;
-	String awnser2String;
-	String awnser3String;
-	String awnser4String;
+	static String questionString;
+	static String awnser1String;
+	static String awnser2String;
+	static String awnser3String;
+	static String awnser4String;
 	static String correctAwnser;
 	
 
 	
 	// Here we use a JLabel to display the question, we utilise its in built HTML formatting so if the question is larger than panel width it goes to a new line
-	
-	
-	
+	static JLabel question;
+	static QuestionButton questionAButton;
+	static QuestionButton questionBButton; 
+	static QuestionButton questionCButton;
+	static QuestionButton questionDButton;
 	
 	public QuestionScreen()
 	{
-		GenerateQuestion();
-		JLabel question = new JLabel("<html><p>"+questionString+"</p></html>");
-		QuestionButton questionAButton = new QuestionButton("<html><p>"+awnser1String+"</p></html>",20,100,"A");
-		QuestionButton questionBButton = new QuestionButton("<html><p>"+awnser2String+"</p></html>",20,175,"B");
-		QuestionButton questionCButton = new QuestionButton("<html><p>"+awnser3String+"</p></html>",20,250,"C");
-		QuestionButton questionDButton = new QuestionButton("<html><p>"+awnser4String+"</p></html>",20,325,"D");
-		
+		question = new JLabel("<html><p>"+questionString+"</p></html>");
+		questionAButton = new QuestionButton("<html><p>"+awnser1String+"</p></html>",20,100,"A");
+		questionBButton = new QuestionButton("<html><p>"+awnser2String+"</p></html>",20,175,"B");
+		questionCButton = new QuestionButton("<html><p>"+awnser3String+"</p></html>",20,250,"C");
+		questionDButton = new QuestionButton("<html><p>"+awnser4String+"</p></html>",20,325,"D");
 		question.setLocation(20,-150);
 		question.setSize(450,400);
 		question.setFont(new Font("Arial Black", Font.PLAIN, 20));
@@ -51,11 +51,13 @@ public class QuestionScreen extends JPanel{
 		this.setSize(500, 400);
 		this.setLayout(null); 
 		this.setVisible(false);
+		
+		GenerateQuestion();
 	}
 	
 
 	
-	String[][] questions = {
+	static String[][] questions = {
 		    {"What is the main feature of Java programming language?","A. High-performance execution","B. Dynamic typing","C. Platform independence","D. Optional semicolons","C"},
 		    {"What is the correct way to declare a variable in Java?","A. var x = 5;","B. int x = 5;","C. float x = 5.0;","D. boolean x = true;","B"},
 		    {"What is the difference between a class and an object in Java?","A. A class is a blueprint for an object, while an object is an instance of a class.","B. A class is a specific type of object, while an object is a collection of classes.","C. A class is a collection of objects, while an object is a blueprint for a class.","D. There is no difference between a class and an object.","A"},
@@ -67,17 +69,22 @@ public class QuestionScreen extends JPanel{
 		    {"What is the difference between a checked and an unchecked exception in Java?","A. A checked exception is a type of exception that must be caught or declared in the method signature, while an unchecked exception is not.","B. An unchecked exception is a type of exception that must be caught or declared in the method signature, while a checked exception is not.","C. A checked exception is a type of exception that can be thrown from any method, while an unchecked exception can only be thrown from the main method.","D. There is no difference between a checked and an unchecked exception in Java.","A"}
 		};
 
-	int QuestionNum = 0;
-	String [] Currentquestion = questions[QuestionNum];
+	static int CurrentQuestionNum = 0;
+	static String [] Currentquestion;
 	
-	public void GenerateQuestion() 
+	public static void GenerateQuestion() 
 	{
+		Currentquestion = questions[CurrentQuestionNum];
 		questionString = Currentquestion[0];
 		awnser1String = Currentquestion[1];
 		awnser2String = Currentquestion[2];
 		awnser3String = Currentquestion[3];
 		awnser4String = Currentquestion[4];
 		correctAwnser = Currentquestion[5];
+		question.setText(questionString);
+		questionAButton.setText(awnser1String);
+		questionBButton.setText(awnser2String);
+		questionCButton.setText(awnser3String);
+		questionDButton.setText(awnser4String);
 	}
-
 }
