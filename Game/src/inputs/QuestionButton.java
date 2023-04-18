@@ -1,4 +1,4 @@
-package entitys;
+package inputs;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import entitys.popUp;
 import main.Game;
 import main.mainClass;
 
@@ -29,6 +30,7 @@ public class QuestionButton extends JButton implements ActionListener{
         this.setVisible(true);
 
     }
+    // This function will handle the event of the button been clicked 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this) {
         	if(this.questionNum == QuestionScreen.correctAwnser)

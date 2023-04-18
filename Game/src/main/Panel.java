@@ -32,9 +32,6 @@ public class Panel extends JPanel{
 		playerHealth.setFont(new Font("Arial", Font.PLAIN, 35));
 		playerHealth.setForeground(Color.WHITE);
 		playerHealth.setVisible(true);
-		
-
-        
 		this.setLayout(null);
 		this.add(playerHealth);
 		this.add(mainMenuButton);
@@ -62,8 +59,6 @@ public class Panel extends JPanel{
 		setPreferredSize(size);
 		setBackground(Color.darkGray);
 	}
-	
-	
 
 	// This is automatically called every frame
 	public void paintComponent(Graphics g)
@@ -83,8 +78,4 @@ public class Panel extends JPanel{
 		return game;
 	}
 
-
-	
-	
-	
 }

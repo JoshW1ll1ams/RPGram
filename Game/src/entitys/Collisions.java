@@ -10,10 +10,9 @@ import Levels.Maps;
 import main.Game;
 
 public class Collisions {
-	public static Rectangle r1 = new Rectangle();
+
 	public static void update()
 	{
-		
 		
 		try {
 			Game.player.CheckCollision();
@@ -21,9 +20,7 @@ public class Collisions {
 		    System.out.println("Player is null");
 		}
 		
-		
-		//System.out.println(Game.CurrentTile());
-		
+		// Loop through the enemies to check if there touching the player
 		for(int i =0; i < Game.currentMobs.size(); i++)
 		{
 			CheckEnemy(Game.currentMobs.get(i), Game.player);
@@ -34,6 +31,8 @@ public class Collisions {
 	static Rectangle entity2 = new Rectangle();
 	static Random rn = new Random();
 	static int knockbackDistance = 5;
+	
+	// Create a function that checks if the player is touching enemy 
 	public static void CheckEnemy(Mob mob, Player player)
 	{
 		// Pick a random direction to send the player if a mob is touching them
@@ -46,6 +45,7 @@ public class Collisions {
 		{
 			mob.health -= player.damage;
 		}
+		// If player is touching enemy reduce health and move them around 
 		if(entity1.intersects(entity2))
 		{
 			player.health -= mob.damage;
@@ -56,6 +56,8 @@ public class Collisions {
 		}
 	
 	}
+	
+	// Function to check if player is touching a block and if they are move them away from it and don't let them go into it
 	public static void TouchingBlock(int BlockType, Player player)
 	{
 		
@@ -69,7 +71,8 @@ public class Collisions {
 				float posX = Game.player.x;
 				float posY = Game.player.y;
 				// Create two rectangles one player position and one in the target blocks position 
-				r1 = new Rectangle((int)Game.player.x+16,(int)Game.player.y+16,(int)Player.playerHeight-32,(int)Player.playerWidth-32);
+			
+				Rectangle r1 = new Rectangle((int)Game.player.x+16,(int)Game.player.y+16,(int)Player.playerHeight-32,(int)Player.playerWidth-32);
 				Rectangle r2 = new Rectangle(x,y,32,32);
 				// If they intersect at different positions affect them accordingly 
 				if(r1.intersects(r2))
@@ -81,6 +84,7 @@ public class Collisions {
 				}
 		}
 	}
+	// Function to check if enemy mob is touching a block and if they are move them away from it and don't let them go into it
 	public static void TouchingBlock(int BlockType, Mob mob)
 	{
 		
@@ -94,7 +98,7 @@ public class Collisions {
 				float posX = mob.x;
 				float posY = mob.y;
 				// Create two rectangles one player position and one in the target blocks position 
-				r1 = new Rectangle((int)mob.x+16,(int)mob.y+16,32,32);
+				Rectangle r1 = new Rectangle((int)mob.x+16,(int)mob.y+16,32,32);
 				Rectangle r2 = new Rectangle(x,y,32,32);
 				// If they intersect at different positions affect them accordingly 
 				if(r1.intersects(r2))
@@ -119,8 +123,7 @@ public class Collisions {
 						mob.movingRight = false;
 						mob.moving = false;
 					}
-						
-				
+
 					if(posX < x) mob.x = (float) (posX-0.5);
 					if(posX > x) mob.x = (float) (posX+0.5);
 					if(posY < y) mob.y = (float) (posY-0.5);

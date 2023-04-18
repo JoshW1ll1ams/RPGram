@@ -13,6 +13,7 @@ public class LoadSave {
 	public static final String LevelSprite = "/tileset.png"; 
 	public static final String ItemSprite = "/item.png"; 
 	public static final String Background = "/menu.png"; 
+	public static final String Unlock = "/levelunlock.png"; 
 	
 	// Function to take in an input stream and return a buffered image 
 	public static BufferedImage GetSprite(String FileName)

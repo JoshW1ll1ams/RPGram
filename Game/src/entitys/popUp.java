@@ -38,7 +38,7 @@ public class popUp extends JLabel{
 		
 	}
 	
-	
+	// A timer function for making the pop up only last as long as we specify 
 	public void Timer(popUp pop, int timerLength)
 	{
 		  Timer timer = new Timer();
@@ -58,3 +58,5 @@ public class popUp extends JLabel{
 				
 	}
 }
+
+

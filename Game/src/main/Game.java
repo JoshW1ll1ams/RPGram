@@ -11,10 +11,10 @@ import Levels.Maps;
 import entitys.Collisions;
 import entitys.Mob;
 import entitys.Player;
-import entitys.QuestionScreen;
 import entitys.entity;
 import entitys.inventory;
 import entitys.popUp;
+import inputs.QuestionScreen;
 
 // Implement the interface runnable to allow us to use multiple threads to avoid game lag
 // With multiple threads we can run more than one task at once
@@ -51,7 +51,7 @@ public class Game implements Runnable{
 	
 	public Game(int[] map)
 	{
-
+		System.out.println("Width= "+WindowWidth+" Height= "+WindowHeight);
 		this.currentMap = map;
 		// Initialise game entities before anything else
 		initialiseEntities();
@@ -215,7 +215,7 @@ public class Game implements Runnable{
 		{
 			currentMobs.get(i).render(g);
 		}
-		inventory.render(g);
+		//inventory.render(g);
 	}
 
 	@Override

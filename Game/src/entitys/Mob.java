@@ -40,6 +40,7 @@ public class Mob extends entity{
 		Boolean movingLeft = false;
 		Boolean movingRight = false;
 		
+		// This function will update the position of the enemy and move them in random directions
 		private void updatePostition() {
 	
 			if(!moving)
@@ -127,9 +128,9 @@ public class Mob extends entity{
 		
 		
 		Boolean dead = false;
+		// Function to check if the enemy is alive 
 		public boolean AliveCheck()
 		{
-
 			if(this.health <= 0)
 			{
 				if(dead == false)
@@ -142,11 +143,8 @@ public class Mob extends entity{
 				// Get index of current enemy and remove from the mob array list 
 				int arrayIndex = Game.currentMobs.indexOf(this);
 				Game.currentMobs.remove(arrayIndex);
-				
-			
 				dead = true;	
 				}
-				
 				return false;
 			}
 			else
@@ -155,9 +153,8 @@ public class Mob extends entity{
 			}
 		}
 		
-		
-		
-		
+
+		// Function to add loot to player inventory if the enemy is killed
 		public void AddLoot()
 		{
 			if(inventory.inv.size() <= 0)
@@ -196,6 +193,7 @@ public class Mob extends entity{
 				g.drawImage(enemySprite[AnimationNum+animationCurrent], (int)x, (int)y, 32, 32, null);
 			}	
 		}
+		// Check collision on the enemy for all the relevant block types
 		public void CheckCollision()
 		{
 			Collisions.TouchingBlock(34, this); 

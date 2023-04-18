@@ -41,6 +41,8 @@ public class inventory extends JPanel {
 	static BufferedImage redLoot;
 	static BufferedImage blueLoot;
 	static BufferedImage greenLoot;
+	
+	// This function will generate the images of the items for the inventory 
 	private void startAnimations() 
 	{
 		BufferedImage img = LoadSave.GetSprite(LoadSave.ItemSprite); // Call our get sprite class and pass in our player
@@ -110,15 +112,11 @@ public class inventory extends JPanel {
 	    }
 	}
 
-	
-	
-	
-	
-	
-	public static void render(Graphics g)
-	{
-
+	public static void render(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
+
 }
 
 

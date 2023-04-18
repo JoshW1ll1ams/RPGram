@@ -6,7 +6,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,8 +26,6 @@ public class mainMenu extends JFrame{
 	
 	JPanel menupanel = new JPanel();
 	
-	
-	
 	static menuButton level1;
 	static menuButton level2;
 	static menuButton level3;
@@ -34,8 +35,6 @@ public class mainMenu extends JFrame{
 	
 	public mainMenu()
 	{			
-
-		
 		
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -43,7 +42,7 @@ public class mainMenu extends JFrame{
 		createPanel();	
 		
 		this.add(menupanel);
-		
+
 
 		this.pack();
 		this.setVisible(true);
@@ -52,6 +51,8 @@ public class mainMenu extends JFrame{
 	// Function to set the sizing of our game panel
 	private void createPanel()
 	{
+
+        
 		// Here we set the dimensions of our JPanel 
 		Dimension size = new Dimension(Game.WindowWidth,Game.WindowHeight); // Here we use our games width and height we calculate using the tiles on the x and y axis
 		menupanel.setPreferredSize(size);
@@ -69,7 +70,8 @@ public class mainMenu extends JFrame{
 		level3.setEnabled(false);
 		level4.setEnabled(false);
 		level5.setEnabled(false);
-		level6.setEnabled(true);
+		level6.setEnabled(false);
+		
 		menuButton exitGame = new menuButton("Exit Game",200,30,400,465,"#f1350d","Exit",-1);
 		menupanel.add(level1);
 		menupanel.add(level2);
@@ -78,16 +80,23 @@ public class mainMenu extends JFrame{
 		menupanel.add(level5);
 		menupanel.add(level6);
 		menupanel.add(exitGame);
+		
+
+		BufferedImage instructionsImg = LoadSave.GetSprite(LoadSave.Unlock);
+        JLabel instructionsImgIcon = new JLabel(new ImageIcon(instructionsImg));
+        instructionsImgIcon.setSize(350,202);
+        instructionsImgIcon.setLocation(20, 100);
+        menupanel.add(instructionsImgIcon);
+
 		// Here I import my background image for the main menu 
-		BufferedImage img = LoadSave.GetSprite(LoadSave.Background);
-        JLabel imageIcon = new JLabel(new ImageIcon(img));
-        imageIcon.setSize(Game.WindowWidth,Game.WindowHeight);
-        imageIcon.setLocation(0, 0);
-        menupanel.add(imageIcon);
+		BufferedImage backGroundImg = LoadSave.GetSprite(LoadSave.Background);
+        JLabel backGroundImgIcon = new JLabel(new ImageIcon(backGroundImg));
+        backGroundImgIcon.setSize(Game.WindowWidth,Game.WindowHeight);
+        backGroundImgIcon.setLocation(0, 0);
+        menupanel.add(backGroundImgIcon);
+        
 	}
 	
 
-	 
-	
 
 }

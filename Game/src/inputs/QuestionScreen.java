@@ -1,4 +1,4 @@
-package entitys;
+package inputs;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -6,8 +6,6 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import inputs.menuButton;
 
 public class QuestionScreen extends JPanel{
 	

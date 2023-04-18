@@ -33,6 +33,7 @@ public class menuButton extends JButton implements ActionListener {
 
     }
     
+    // Function to handle if the button is clicked 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this) {
         	if(this.function == "Level")

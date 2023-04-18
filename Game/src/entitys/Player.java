@@ -3,6 +3,17 @@ package entitys;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
+
 import main.Game;
 
 // Player class extends entity class
@@ -38,8 +49,6 @@ public class Player extends entity{
 	private boolean rightMoving;
 	private boolean downMoving;
 	boolean playerAttacking;
-
-	
 
 	 final static int idle = 1;
 	 final static int left = 6;
@@ -81,7 +90,7 @@ public class Player extends entity{
 		}
 	}
 
-		
+	
 	// Variable to keep track of if player is moving
 	private boolean playerMoving = false;
 
@@ -89,6 +98,10 @@ public class Player extends entity{
 	private float playerSpeed = 0.5f;
 	public static int playerAttackingAdd;
 	public static Boolean canMove = true;
+	
+
+
+   
 	private void updatePostition() {
 		
 		playerMoving = false;
@@ -166,7 +179,7 @@ public class Player extends entity{
 		Collisions.TouchingBlock(357, this);
 	}
 	
-	Boolean dead = false;
+	public Boolean dead = false;
 
 	public void CheckAlive()
 	{
